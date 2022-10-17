@@ -3,7 +3,7 @@
 /**
  * get_func - find associated function to format `_printf`
  *
- * @frmt: format (<char>, <string>, <float>, <int>)
+ * @format: format (<char>, <string>, <float>, <int>)
  *
  * Return: function (Success) || NULL (Fail)
  */
@@ -12,9 +12,10 @@ int (*get_func(const char *format))(va_list)
 {
 	unsigned int idx = 0;
 
-	format_struct funcs[] = {
+	op_t funcs[] = {
 		{"c", print_c},
-		{"s", print_s}
+		{"s", print_s},
+		{NULL, NULL}
 	};
 
 	while (funcs[idx++].s)
@@ -27,16 +28,15 @@ int (*get_func(const char *format))(va_list)
 /**
  * _printf - print to the console
  *
- * @frmt: <array> to print && checks type (format)
+ * @format: <array> to print && checks type (format)
  *
  * Return: <int> count of char printed
  */
 
 int _printf(const char *format, ...)
 {
-	int count, idx;
+	int count, idx = 0;
 	int (*f)(va_list);
-
 	va_list params;
 
 	if (!format || (format[0] == '%' && format[1] == '\0'))

@@ -26,16 +26,15 @@ int print_c(va_list params)
 int print_s(va_list params)
 {
 	char *string;
-	int idx, count = 0;
+	int idx = 0;
 
 	string = va_arg(params, char *);
 
 	if (!string)
-		string == "(null)";
+		string = "(null)";
 
-	idx = 0;
 	while (string[idx++])
-		count += _putchar(string[idx]);
+		_putchar(string[idx]);
 
-	return (count);
+	return (idx);
 }
