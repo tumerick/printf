@@ -15,6 +15,8 @@ int (*get_func(const char *format))(va_list)
 	op_t funcs[] = {
 		{"c", print_c},
 		{"s", print_s},
+		{"i", print_int},
+		{"d", print_int},
 		{NULL, NULL}
 	};
 
