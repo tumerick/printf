@@ -3,7 +3,7 @@
 int main(void)
 {
 	_putchar('o');
-	_printf("Hell%c\n", 'o');
+	_printf("Hell\n", 'O');
 	_printf("%s\n", "Test");
 	_printf("Binary of 5: %b\n", 5);
 	_printf("Octa; of 78: %o\n", 78);

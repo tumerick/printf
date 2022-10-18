@@ -1,46 +1,34 @@
 #include "main.h"
 
 /**
- * print_c - print characters with (%c)
- *
- * @params: <array> of <char> types to print
- *
- * Return: <int> num of params printed
+ * print_string - loops through a string and prints
+ * every character
+ * @l: va_list arguments from _printf
+ * @f: pointer to the struct flags that determines
+ * if a flag is passed to _printf
+ * Return: number of char printed
  */
-
-int print_c(va_list params)
+int print_string(va_list l, flags_t *f)
 {
-	int _char = va_arg(params, int);
+	char *s = va_arg(l, char *);
 
-	return (_putchar(_char));
+	(void)f;
+
+	if (!s)
+		s = "(null)";
+	return (_puts(s));
 }
 
 /**
- * print_s - print a string with (%s)
- *
- * @params: <array> of characters
- *
- * Return: <int> num of params printed
+ * print_char - prints a character
+ * @l: va_list arguments from _printf
+ * @f: pointer to the struct flags that determines
+ * if a flag is passed to _printf
+ * Return: number of char printed
  */
-
-int print_s(va_list params)
+int print_char(va_list l, flags_t *f)
 {
-	char *string;
-	string = va_arg(params, char *);
-
-	return (_puts(string));
-}
-
-/**
- * _puts - prints a string
- * @str: pointer to the string to print
- * Return: number of chars printted
- */
-int _puts(char *str)
-{
-	register int i;
-
-	for (i = 0; str[i] != '\0'; i++)
-		_putchar(str[i]);
-	return (i);
+	(void)f;
+	_putchar(va_arg(l, int));
+	return (1);
 }

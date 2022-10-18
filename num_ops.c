@@ -1,64 +1,84 @@
 #include "main.h"
 
 /**
- * print_int - prints int
- * @params: <int> types to print
- *
- * Return: num of int printed
+ * print_int - prints an integer
+ * @l: va_list of arguments from _printf
+ * @f: pointer to the struct flags determining
+ * if a flag is passed to _printf
+ * Return: number of char printed
  */
-
-int print_int(va_list params)
+int print_int(va_list l, flags_t *f)
 {
-	int n = va_arg(params, int);
-	int count = count_digits(n);
+	int n = va_arg(l, int);
+	int res = count_digit(n);
 
-	print_num(n);
-	return (count);
+	if (f->space == 1 && f->plus == 0 && n >= 0)
+		res += _putchar(' ');
+	if (f->plus == 1 && n >= 0)
+		res += _putchar('+');
+	if (n <= 0)
+		res++;
+	print_number(n);
+	return (res);
 }
 
 /**
- * print_num - prints integers
- * @n: integer to print
+ * print_unsigned - prints an unsigned integer
+ * @l: va_list of arguments from _printf
+ * @f: pointer to the struct flags determining
+ * if a flag is passed to _printf
+ * Return: number of char printed
  */
-
-void print_num(int n)
+int print_unsigned(va_list l, flags_t *f)
 {
-	unsigned int num;
+	unsigned int u = va_arg(l, unsigned int);
+	char *str = convert(u, 10, 0);
+
+	(void)f;
+	return (_puts(str));
+}
+
+/**
+ * print_number - helper function that loops through
+ * an integer and prints all its digits
+ * @n: integer to be printed
+ */
+void print_number(int n)
+{
+	unsigned int n1;
 
 	if (n < 0)
 	{
 		_putchar('-');
-		num = -n;
+		n1 = -n;
 	}
 	else
-	{
-		num = n;
-	}
+		n1 = n;
 
-	if (num / 10)
-		print_num((num /10));
-	_putchar((num % 10) + '0');
+	if (n1 / 10)
+		print_number(n1 / 10);
+	_putchar((n1 % 10) + '0');
 }
 
 /**
- * count_digits - counts the number of digits in a number
- * @n - number to be counted
+ * count_digit - returns the number of digits in an integer
+ * for _printf
+ * @i: integer to evaluate
+ * Return: number of digits
  */
-
-int count_digits(int n)
+int count_digit(int i)
 {
-	int count;
+	unsigned int d = 0;
+	unsigned int u;
 
-	if (n == 0)
-		return (1);
-
-	count = 0;
-
-	while (n != 0)
+	if (i < 0)
+		u = i * -1;
+	else
+		u = i;
+	while (u != 0)
 	{
-		n = n / 10;
-		++count;
+		u /= 10;
+		d++;
 	}
-	
-	return (count);
+	return (d);
 }
