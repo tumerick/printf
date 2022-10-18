@@ -17,6 +17,10 @@ int (*get_func(const char *format))(va_list)
 		{"s", print_s},
 		{"i", print_int},
 		{"d", print_int},
+		{"b", print_binary},
+		{"o", print_octal},
+		{"x", print_hex},
+		{"X", print_alpha_hex},
 		{NULL, NULL}
 	};
 

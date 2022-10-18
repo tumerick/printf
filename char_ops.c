@@ -26,15 +26,21 @@ int print_c(va_list params)
 int print_s(va_list params)
 {
 	char *string;
-	int idx = 0;
-
 	string = va_arg(params, char *);
 
-	if (!string)
-		string = "(null)";
+	return (_puts(string));
+}
 
-	while (string[idx++])
-		_putchar(string[idx]);
+/**
+ * _puts - prints a string
+ * @str: pointer to the string to print
+ * Return: number of chars printted
+ */
+int _puts(char *str)
+{
+	register int i;
 
-	return (idx);
+	for (i = 0; str[i] != '\0'; i++)
+		_putchar(str[i]);
+	return (i);
 }
